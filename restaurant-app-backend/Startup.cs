@@ -13,6 +13,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using restaurant_app_backend.Models;
+using Microsoft.OpenApi.Models;
+using restaurant_app_backend.Service;
+using restaurant_app_backend.Repository;
 
 namespace restaurant_app_backend
 {
@@ -28,18 +31,26 @@ namespace restaurant_app_backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddScoped<IRestaurantService, RestaurantService>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            // services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //     .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddIdentity<UserModel, IdentityRole>()
-                 .AddEntityFrameworkStores<ApplicationDbContext>()
+                 .AddEntityFrameworkStores<AppDbContext>()
                  .AddDefaultTokenProviders()
                  .AddRoles<IdentityRole>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+            });
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
@@ -92,7 +103,11 @@ namespace restaurant_app_backend
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -54,9 +54,21 @@
               "target": "Package",
               "version": "[3.1.9, )"
             },
+            "Microsoft.EntityFrameworkCore.SqlServer.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[3.1.9, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.1.1, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[6.1.1, )"
             }
           },
           "imports": [

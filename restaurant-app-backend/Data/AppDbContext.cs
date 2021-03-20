@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using restaurant_app_backend.DbModels;
 using restaurant_app_backend.Models;
 
 namespace restaurant_app_backend.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<UserModel>
+    public class AppDbContext : IdentityDbContext<UserModel>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
 
-            // DbSet<UserModel> Users
         }
+        public DbSet<Restaurant> Restaurants { get; set; }
+
     }
 }

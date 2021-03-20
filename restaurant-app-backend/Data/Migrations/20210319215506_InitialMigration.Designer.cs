@@ -9,7 +9,7 @@ using restaurant_app_backend.Data;
 
 namespace restaurant_app_backend.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20210319215506_InitialMigration")]
     partial class InitialMigration
     {
