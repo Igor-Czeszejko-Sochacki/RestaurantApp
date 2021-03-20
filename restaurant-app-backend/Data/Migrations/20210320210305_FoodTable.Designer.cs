@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using restaurant_app_backend.Data;
 
 namespace restaurant_app_backend.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210320210305_FoodTable")]
+    partial class FoodTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,12 +168,7 @@ namespace restaurant_app_backend.Data.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RestaurantId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("RestaurantId");
 
                     b.ToTable("Food");
                 });
@@ -319,13 +316,6 @@ namespace restaurant_app_backend.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("restaurant_app_backend.DbModels.Food", b =>
-                {
-                    b.HasOne("restaurant_app_backend.DbModels.Restaurant", "Restaurant")
-                        .WithMany("Food")
-                        .HasForeignKey("RestaurantId");
                 });
 #pragma warning restore 612, 618
         }

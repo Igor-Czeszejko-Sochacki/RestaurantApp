@@ -12,5 +12,6 @@ namespace restaurant_app_backend.Service
         Task<ResultDTO> AddRestaurant(NewRestaurantVM newRestaurantVM);
         Task<ResultDTO> PatchRestaurant(int restaurantId, NewRestaurantVM newRestaurantVm);
         Task<RestaurantListDTO> GetAllRestaurants();
+        Task<ResultDTO> DeleteRestaurant(int restaurantId);
     }
 }

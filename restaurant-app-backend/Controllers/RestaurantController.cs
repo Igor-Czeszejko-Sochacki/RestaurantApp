@@ -48,5 +48,13 @@ namespace restaurant_app_backend.Controllers
             return Ok(restaurantList);
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteRestaurant(int restaurantId)
+        {
+            var result = await _restaurantService.DeleteRestaurant(restaurantId);
+            if (result.Response != null)
+                return BadRequest("Restaurant does not exist");
+            return Ok("Restaurant was deleted");
+        }
     }
 }

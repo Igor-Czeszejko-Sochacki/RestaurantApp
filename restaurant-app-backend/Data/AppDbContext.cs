@@ -16,6 +16,6 @@ namespace restaurant_app_backend.Data
 
         }
         public DbSet<Restaurant> Restaurants { get; set; }
-
+        public DbSet<Food> Food { get; set; }
     }
 }

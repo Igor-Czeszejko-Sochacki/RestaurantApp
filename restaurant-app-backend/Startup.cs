@@ -32,6 +32,9 @@ namespace restaurant_app_backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IRestaurantService, RestaurantService>();
+
+            services.AddScoped<IFoodService, FoodService>();
+
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddDbContext<AppDbContext>(options =>

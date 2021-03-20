@@ -88,6 +88,27 @@ namespace restaurant_app_backend.Service
             return restaurantList;
         }
 
-
+        public async Task<ResultDTO> DeleteRestaurant(int restaurantId)
+        {
+            var result = new ResultDTO()
+            {
+                Response = null
+            
+            };
+            try
+            {
+                var restaurant = await _restaurantRepo.GetSingleEntity(x => x.Id == restaurantId);
+                if (restaurant == null)
+                    result.Response = "Restaurant not found";
+                else
+                   await _restaurantRepo.Delete(restaurant);
+            }
+            catch (Exception e)
+            {
+                result.Response = e.Message;
+                return result;
+            }
+            return result;
+        }
     }
 }

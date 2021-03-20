@@ -15,5 +15,6 @@ namespace restaurant_app_backend.DbModels
         public string Category { get; set; }
         public int DeliveryPrice { get; set; }
         public float DeliveryTime { get; set; }
+        public List<Food> Food { get; set; }
     }
 }
