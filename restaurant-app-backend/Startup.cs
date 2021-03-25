@@ -15,7 +15,7 @@ using Microsoft.Extensions.Hosting;
 using restaurant_app_backend.Models;
 using Microsoft.OpenApi.Models;
 using restaurant_app_backend.Service;
-using restaurant_app_backend.Repository;
+using restaurant_app_backend.IRepository;
 
 namespace restaurant_app_backend
 {
@@ -31,6 +31,9 @@ namespace restaurant_app_backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped<IAccountService, AccountService>();
+
             services.AddScoped<IRestaurantService, RestaurantService>();
 
             services.AddScoped<IFoodService, FoodService>();

@@ -48,6 +48,15 @@ namespace restaurant_app_backend.Controllers
             return Ok(restaurantList);
         }
 
+        [HttpGet("GetFilter")]
+        public async Task<IActionResult> GetRestaurantsByType(string type)
+        {
+            var restaurantList = await _restaurantService.GetRestaurantsByType(type);
+            if (restaurantList == null)
+                return BadRequest("No restaurants to show");
+            return Ok(restaurantList);
+        }
+
         [HttpDelete]
         public async Task<IActionResult> DeleteRestaurant(int restaurantId)
         {

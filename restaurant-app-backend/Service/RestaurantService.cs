@@ -1,7 +1,7 @@
 ﻿using restaurant_app_backend.DbModels;
 using restaurant_app_backend.DbModels.Request;
 using restaurant_app_backend.DbModels.Response;
-using restaurant_app_backend.Repository;
+using restaurant_app_backend.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,12 +88,29 @@ namespace restaurant_app_backend.Service
             return restaurantList;
         }
 
+        public async Task<RestaurantListDTO> GetRestaurantsByType(string type)
+        {
+            var restaurantList = new RestaurantListDTO()
+            {
+                RestaurantList = await _restaurantRepo.GetAll()
+            };
+
+            var filteredRestaurantList = new List<Restaurant>();
+
+            foreach (Restaurant restaurant in restaurantList.RestaurantList)
+            {
+                if (restaurant.Category == type)
+                    filteredRestaurantList.Add(restaurant);
+            }
+            restaurantList.RestaurantList = filteredRestaurantList;
+            return restaurantList;
+        }
+
         public async Task<ResultDTO> DeleteRestaurant(int restaurantId)
         {
             var result = new ResultDTO()
             {
                 Response = null
-            
             };
             try
             {

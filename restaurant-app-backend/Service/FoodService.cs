@@ -1,7 +1,7 @@
 ﻿using restaurant_app_backend.DbModels;
 using restaurant_app_backend.DbModels.Request;
 using restaurant_app_backend.DbModels.Response;
-using restaurant_app_backend.Repository;
+using restaurant_app_backend.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

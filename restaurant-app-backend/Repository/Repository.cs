@@ -7,7 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace restaurant_app_backend.Repository
+namespace restaurant_app_backend.IRepository
 {
     public class Repository<T> : IRepository<T> where T : Entity
     {
